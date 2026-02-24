@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malik Hamza Shahid — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#1A56A0;--blue-l:#e8f0fa;--blue-m:#3b7dd8;
+      --dark:#0d1b2a;--gray:#4a5568;--light:#f7f9fc;
+      --white:#ffffff;--border:#e2e8f0;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--dark);line-height:1.65}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:100;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .nav-brand{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--blue);text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;font-size:.88rem;font-weight:500;color:var(--gray);transition:color .2s;letter-spacing:.03em}
+    .nav-links a:hover{color:var(--blue)}
+
+    /* HERO */
+    .hero{min-height:100vh;padding-top:60px;display:flex;align-items:center;background:linear-gradient(135deg,#f7f9fc 0%,#e8f0fa 100%);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(26,86,160,.08) 0%,transparent 70%)}
+    .hero-inner{max-width:1100px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .hero-text h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,5vw,3.5rem);line-height:1.15;color:var(--dark);margin-bottom:1rem}
+    .hero-text h1 span{color:var(--blue)}
+    .tagline{font-size:1.05rem;color:var(--gray);margin-bottom:1.6rem;font-weight:300}
+    .tagline strong{color:var(--blue);font-weight:600}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
+    .badge{background:var(--white);border:1px solid var(--border);color:var(--blue);font-size:.78rem;font-weight:600;padding:.3rem .85rem;border-radius:20px;letter-spacing:.04em}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn{padding:.75rem 1.8rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,86,160,.2)}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-outline{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+    .btn-outline:hover{background:var(--blue-l)}
+
+    /* PHOTO */
+    .hero-photo{display:flex;justify-content:center;align-items:center}
+    .photo-wrap{position:relative;width:300px;height:300px}
+    .photo-wrap::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:3px dashed rgba(26,86,160,.25);animation:spin 20s linear infinite}
+    .photo-wrap::after{content:'';position:absolute;inset:-6px;border-radius:50%;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-m) 100%);z-index:0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .photo-wrap img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;border:5px solid #fff}
+
+    /* SECTIONS */
+    section{padding:5rem 2rem}
+    .container{max-width:1100px;margin:0 auto}
+    .section-label{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+    .section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:var(--dark);margin-bottom:.5rem}
+    .section-line{width:48px;height:3px;background:var(--blue);border-radius:4px;margin-bottom:2.5rem}
+
+    /* ABOUT */
+    #about{background:var(--white)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+    .about-text p{color:var(--gray);margin-bottom:1rem;font-size:.97rem}
+    .about-info{display:flex;flex-direction:column;gap:1rem}
+    .info-item{display:flex;align-items:flex-start;gap:1rem;background:var(--light);border-radius:10px;padding:1rem 1.2rem;border-left:3px solid var(--blue)}
+    .info-icon{font-size:1.4rem;flex-shrink:0}
+    .info-label{font-size:.75rem;font-weight:700;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
+    .info-value{font-size:.9rem;color:var(--dark);font-weight:500}
+
+    /* SKILLS */
+    #skills{background:var(--light)}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+    .skill-card{background:var(--white);border-radius:12px;padding:1.5rem;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+    .skill-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(26,86,160,.1)}
+    .skill-card-icon{font-size:2rem;margin-bottom:.7rem}
+    .skill-card h3{font-size:.9rem;font-weight:700;color:var(--blue);margin-bottom:.8rem;letter-spacing:.04em;text-transform:uppercase}
+    .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+    .skill-tag{background:var(--blue-l);color:var(--blue);font-size:.78rem;font-weight:600;padding:.25rem .65rem;border-radius:6px}
+
+    /* PROJECTS */
+    #projects{background:var(--white)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+    .project-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+    .project-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(26,86,160,.12)}
+    .project-top{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-m) 100%);padding:2rem 1.5rem;position:relative;overflow:hidden}
+    .project-top::after{content:attr(data-icon);position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:4rem;opacity:.15}
+    .project-type{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.4rem}
+    .project-top h3{font-size:1.2rem;font-weight:700;color:#fff}
+    .project-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+    .project-body p{color:var(--gray);font-size:.92rem;margin-bottom:1rem;flex:1}
+    .project-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+    .tech-tag{background:var(--light);color:var(--gray);font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:5px}
+    .project-link{display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;color:var(--blue);font-size:.85rem;font-weight:600;transition:gap .2s}
+    .project-link:hover{gap:.7rem}
+
+    /* CERTS */
+    #certifications{background:var(--light)}
+    .certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+    .cert-card{background:var(--white);border-radius:10px;padding:1.1rem 1.3rem;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.9rem;transition:transform .15s,box-shadow .15s}
+    .cert-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,86,160,.08)}
+    .cert-icon{width:40px;height:40px;border-radius:8px;background:var(--blue-l);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+    .cert-name{font-size:.88rem;font-weight:600;color:var(--dark)}
+    .cert-issuer{font-size:.76rem;color:var(--blue);font-weight:500;margin-top:.15rem}
+
+    /* RESUME */
+    #resume{background:var(--white)}
+    .resume-box{background:linear-gradient(135deg,var(--blue) 0%,#1040a0 100%);border-radius:16px;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+    .resume-box h2{font-family:'DM Serif Display',serif;color:#fff;font-size:1.8rem;margin-bottom:.5rem}
+    .resume-box p{color:rgba(255,255,255,.8);font-size:.95rem}
+    .btn-white{background:#fff;color:var(--blue);font-weight:700;padding:.85rem 2rem;border-radius:8px;text-decoration:none;font-size:.95rem;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem;flex-shrink:0}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+
+    /* CONTACT */
+    #contact{background:var(--light)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
+    .contact-info h3{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:1.5rem}
+    .contact-item{display:flex;align-items:center;gap:.9rem;margin-bottom:1rem}
+    .c-icon{width:40px;height:40px;border-radius:8px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .contact-item a,.contact-item span{font-size:.9rem;color:var(--gray);text-decoration:none;font-weight:500;transition:color .2s}
+    .contact-item a:hover{color:var(--blue)}
+    .social-links{display:flex;gap:.8rem;margin-top:1.5rem}
+    .social-btn{padding:.6rem 1.2rem;border-radius:8px;background:var(--white);border:1px solid var(--border);color:var(--blue);font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:.4rem}
+    .social-btn:hover{background:var(--blue);color:#fff}
+    .contact-form{display:flex;flex-direction:column;gap:1rem}
+    .contact-form input,.contact-form textarea{padding:.75rem 1rem;border-radius:8px;border:1px solid var(--border);font-family:inherit;font-size:.9rem;color:var(--dark);background:var(--white);transition:border-color .2s,box-shadow .2s;outline:none;width:100%}
+    .contact-form input:focus,.contact-form textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,160,.1)}
+    .contact-form textarea{resize:vertical;min-height:130px}
+    .contact-form button{background:var(--blue);color:#fff;padding:.85rem 1.5rem;border-radius:8px;border:none;font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s;width:100%}
+    .contact-form button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,86,160,.3)}
+
+    /* FOOTER */
+    footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;padding:1.8rem;font-size:.83rem}
+    footer span{color:var(--blue)}
+
+    /* ANIMATION */
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .hero-inner{grid-template-columns:1fr;text-align:center;gap:2.5rem}
+      .hero-photo{order:-1}
+      .photo-wrap{width:200px;height:200px}
+      .hero-badges,.hero-btns{justify-content:center}
+      .about-grid,.contact-grid{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      .resume-box{flex-direction:column;text-align:center;align-items:center}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-brand">MHS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text fade-in">
+      <p class="section-label">👋 Hello, I'm</p>
+      <h1>Malik<br/><span>Hamza Shahid</span></h1>
+      <p class="tagline">Software Engineering Student at <strong>Riphah International University</strong><br/>Passionate about web &amp; mobile app development.</p>
+      <div class="hero-badges">
+        <span class="badge">🎓 6th Semester</span>
+        <span class="badge">📊 CGPA 3.15</span>
+        <span class="badge">🔍 Seeking Internship</span>
+        <span class="badge">📍 Chakwal, Pakistan</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">💬 Get In Touch</a>
+        <a href="#projects" class="btn btn-outline">🚀 View Projects</a>
+      </div>
+    </div>
+    <div class="hero-photo fade-in">
+      <div class="photo-wrap">
+        <!-- Use relative path with actual image filename -->
+        <img src="Images/Hamza.jpg" alt="Malik Hamza Shahid"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>Hi! I'm <strong>Malik Hamza Shahid</strong>, a passionate Software Engineering student currently in my 6th semester at Riphah International University, Islamabad (I-14 Campus).</p>
+        <p>I love turning ideas into reality through code — whether it's building mobile apps with Flutter and Firebase, creating full-stack web applications, or exploring new technologies. I'm always eager to learn and grow as a developer.</p>
+        <p>I'm actively seeking an internship opportunity where I can apply my academic knowledge to real-world challenges, contribute to a team, and kick-start my professional career in software development.</p>
+      </div>
+      <div class="about-info">
+        <div class="info-item">
+          <span class="info-icon">🎓</span>
+          <div>
+            <div class="info-label">University</div>
+            <div class="info-value">Riphah International University, I-14</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📚</span>
+          <div>
+            <div class="info-label">Program</div>
+            <div class="info-value">BS Software Engineering — 6th Semester</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📊</span>
+          <div>
+            <div class="info-label">CGPA</div>
+            <div class="info-value">3.15 / 4.0</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">Chakwal, Pakistan</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">✉️</span>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">hamzashahidmalik08@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">What I Know</p>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-card-icon">💻</div>
+        <h3>Programming Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">C++</span><span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag">PHP</span><span class="skill-tag">Dart</span><span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🌐</div>
+        <h3>Web Development</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span><span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📱</div>
+        <h3>Mobile Development</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Flutter</span><span class="skill-tag">Android Studio</span><span class="skill-tag">Firebase</span><span class="skill-tag">Dart</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🛠️</div>
+        <h3>Tools & Platforms</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">VS Code</span><span class="skill-tag">XAMPP</span><span class="skill-tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">What I've Built</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <div class="project-top" data-icon="🍔">
+          <p class="project-type">Mobile Application</p>
+          <h3>Food Ordering App</h3>
+        </div>
+        <div class="project-body">
+          <p>A fully functional mobile food ordering application built with Flutter. Users can browse food categories, add items to cart, and place orders. Firebase is used as the real-time backend database for data sync.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Flutter</span><span class="tech-tag">Dart</span><span class="tech-tag">Firebase</span><span class="tech-tag">Android</span>
+          </div>
+          <a href="https://github.com/Hamza54523/food_ordering_app" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top" data-icon="🏠">
+          <p class="project-type">Web Application</p>
+          <h3>Property Hub</h3>
+        </div>
+        <div class="project-body">
+          <p>A full-stack property listing and management web application. Features include user authentication, CRUD operations for property listings, and a dynamic search and filter system for easy property discovery.</p>
+          <div class="project-tech">
+            <span class="tech-tag">PHP</span><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">MySQL</span>
+          </div>
+          <a href="https://github.com/Hamza54523" target="_blank" class="project-link">View GitHub Profile →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top" data-icon="📁">
+          <p class="project-type">Academic Projects</p>
+          <h3>Semester Projects</h3>
+        </div>
+        <div class="project-body">
+          <p>A collection of academic projects developed throughout my semesters — covering Data Structures, OOP, Algorithms, and more. All projects are documented and uploaded to GitHub showcasing version control practices.</p>
+          <div class="project-tech">
+            <span class="tech-tag">C++</span><span class="tech-tag">Java</span><span class="tech-tag">Python</span><span class="tech-tag">GitHub</span>
+          </div>
+          <a href="https://github.com/Hamza54523" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <p class="section-label">What I've Learned</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+    <div class="certs-grid fade-in">
+      <div class="cert-card"><div class="cert-icon">🐍</div><div><div class="cert-name">Python Essentials 1 &amp; 2</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+      <div class="cert-card"><div class="cert-icon">⚙️</div><div><div class="cert-name">C++ Essentials 2 &amp; Advanced</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🟨</div><div><div class="cert-name">JavaScript Essentials 1 &amp; 2</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🐧</div><div><div class="cert-name">Linux Essentials</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🖥️</div><div><div class="cert-name">Operating Systems Basics</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🤖</div><div><div class="cert-name">AI Fundamentals</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🤝</div><div><div class="cert-name">Engaging Stakeholders for Success</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="container">
+    <p class="section-label">My CV</p>
+    <h2 class="section-title">Resume</h2>
+    <div class="section-line"></div>
+    <div class="resume-box fade-in">
+      <div>
+        <h2>Download My CV</h2>
+        <p>View my complete resume including education, skills, projects, and certifications.</p>
+      </div>
+      <a href="Malik_Hamza_Shahid_CV.pdf" download class="btn-white">⬇️ Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Let's Talk</p>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <div class="contact-item"><div class="c-icon">✉️</div><a href="mailto:hamzashahidmalik08@gmail.com">hamzashahidmalik08@gmail.com</a></div>
+        <div class="contact-item"><div class="c-icon">📞</div><span>03425432088</span></div>
+        <div class="contact-item"><div class="c-icon">📍</div><span>Chakwal, Pakistan</span></div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/hamza-shahid-se54523" target="_blank" class="social-btn">💼 LinkedIn</a>
+          <a href="https://github.com/Hamza54523" target="_blank" class="social-btn">🐱 GitHub</a>
+        </div>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Made with ❤️ by <span>Malik Hamza Shahid</span> &nbsp;|&nbsp; Software Engineering Student &nbsp;|&nbsp; © 2025</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+    emailjs.init("KafmHtJae6GuKCZ0a"); // paste public key here
+})();
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_7sdifb9", "template_d43nq5k", this)
+    .then(function() {
+        alert("Message Sent Successfully!");
+    }, function(error) {
+        alert("Failed to send message.");
+    });
+});
+</script>
+</body>
+</html>
